@@ -1,3 +1,5 @@
+# rusty-ai-chat
+
 <picture>
     <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
     <img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo">
@@ -27,7 +29,7 @@ Of course, you should explore around the project structure, but the best place t
 
 ## Running your project
 
-`cargo leptos watch`  
+`cargo leptos watch`
 By default, you can access your local project at `http://localhost:3000`
 
 ## Installing Additional Tools
@@ -66,4 +68,3 @@ Although it is not recommended, you can also run your project without server int
 `trunk serve --open --features csr`
 
 This may be useful for integrating external tools which require a static site, e.g. `tauri`.
-# rusty-ai-chat
