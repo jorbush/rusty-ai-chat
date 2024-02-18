@@ -71,6 +71,7 @@ jobs:
 
       - name: Build with Trunk
         run: ./trunk build --release
+        working-directory: ./dist
 
       - name: Preview Deploy
         id: preview
