@@ -13,7 +13,7 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/rusty-ai-chat.css"/>
 
         // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="Rusty AI Chat"/>
 
         // content for this welcome page
         <Router>
@@ -35,7 +35,7 @@ fn HomePage() -> impl IntoView {
     let on_click = move |_| set_count.update(|count| *count += 1);
 
     view! {
-        <h1>"Welcome to Leptos!"</h1>
+        <h1>"Welcome to Rusty AI Chat!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
     }
 }
