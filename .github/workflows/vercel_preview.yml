@@ -6,7 +6,7 @@ name: Leptos CSR Vercel Preview
 on:
   pull_request:
     branches: [ "main" ]
-
+  workflow_dispatch:
 
 env:
   CARGO_TERM_COLOR: always
@@ -71,7 +71,6 @@ jobs:
 
       - name: Build with Trunk
         run: ./trunk build --release
-        working-directory: ./dist
 
       - name: Preview Deploy
         id: preview
