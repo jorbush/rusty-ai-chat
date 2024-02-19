@@ -1,70 +1,46 @@
-# rusty-ai-chat
+# Rusty AI Chat
 
-<picture>
-    <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
-    <img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo">
-</picture>
+## Overview
 
-# Leptos Starter Template
+**Rusty AI Chat** is a Rust-based project that offers a unique chat experience by utilizing a local Open Source LLM.
 
-This is a template for use with the [Leptos](https://github.com/leptos-rs/leptos) web framework and the [cargo-leptos](https://github.com/akesson/cargo-leptos) tool.
+This project allows users to input prompts and engage with a powerful language model, similar to ChatGPT, all within the privacy and control of our local environment.
 
-## Creating your template repo
+## How it works?
 
-If you don't have `cargo-leptos` installed you can install it with
+The project utilizes the weights of a neural network of the local Open Source LLM, using [Rustformers](https://github.com/rustformers/llm) to load and use these weights for prompt responses.
 
-`cargo install cargo-leptos`
+The project is built with [Leptos](https://leptos.dev/), a Fullstack Rust framework, ensuring a comprehensive and efficient development experience.
 
-Then run
+## Requirements
 
-`cargo leptos new --git leptos-rs/start`
+You need to have the following installed in your system:
+- Rust (nightly)
+- Node.js
+- a model
 
-to generate a new project template (you will be prompted to enter a project name).
+You can install the following packages using the following command:
 
-`cd {projectname}`
-
-to go to your newly created project.
-
-Of course, you should explore around the project structure, but the best place to start with your application code is in `src/app.rs`.
-
-## Running your project
-
-`cargo leptos watch`
-By default, you can access your local project at `http://localhost:3000`
-
-## Installing Additional Tools
-
-By default, `cargo-leptos` uses `nightly` Rust, `cargo-generate`, and `sass`. If you run into any trouble, you may need to install one or more of these tools.
-
-1. `rustup toolchain install nightly --allow-downgrade` - make sure you have Rust nightly
-2. `rustup target add wasm32-unknown-unknown` - add the ability to compile Rust to WebAssembly
-3. `cargo install cargo-generate` - install `cargo-generate` binary (should be installed automatically in future)
-4. `npm install -g sass` - install `dart-sass` (should be optional in future)
-
-## Executing a Server on a Remote Machine Without the Toolchain
-After running a `cargo leptos build --release` the minimum files needed are:
-
-1. The server binary located in `target/server/release`
-2. The `site` directory and all files within located in `target/site`
-
-Copy these files to your remote server. The directory structure should be:
-```text
-leptos_start
-site/
+```bash
+make install
 ```
-Set the following environment variables (updating for your project as needed):
-```sh
-export LEPTOS_OUTPUT_NAME="leptos_start"
-export LEPTOS_SITE_ROOT="site"
-export LEPTOS_SITE_PKG_DIR="pkg"
-export LEPTOS_SITE_ADDR="127.0.0.1:3000"
-export LEPTOS_RELOAD_PORT="3001"
+> [!IMPORTANT]
+> Only works on Linux and MacOS.
+
+This will add the following packages:
+- `rustup toolchain install nightly` (to use the nightly version of Rust).
+- `rustup target add wasm32-unknown-unknown` (to build the frontend components).
+- `cargo install trunk cargo-leptos` ([trunk](https://trunkrs.dev/) to work in _localhost_ (as automatic refresh) and [leptos](https://leptos.dev/) is a fullstack framework).
+- `npm install` (to install the frontend dependencies).
+
+## Getting Started
+
+You can use it by running the following command:
+
+```bash
+make run
 ```
-Finally, run the server binary.
+> [!IMPORTANT]
+> Only works on Linux and MacOS.
 
-## Notes about CSR and Trunk:
-Although it is not recommended, you can also run your project without server integration using the feature `csr` and `trunk serve`:
-
-`trunk serve --open --features csr`
-
-This may be useful for integrating external tools which require a static site, e.g. `tauri`.
+This will start the chat on your web browser and you can start typing your prompts.
