@@ -4,7 +4,7 @@
 
 **Rusty AI Chat** is a Rust-based project that offers a chat experience by utilizing a local Open Source LLM.
 
-This project allows users to input prompts and engage with a powerful language model, similar to ChatGPT, all within the privacy and control of our local environment.
+This project allows users to input prompts and engage with a powerful language model, similar to ChatGPT, all within the privacy and control of their local environment.
 
 ## How it works?
 
