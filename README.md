@@ -17,7 +17,7 @@ The project is built with [Leptos](https://leptos.dev/), a Fullstack Rust framew
 You need to have the following installed in your system:
 - Rust (nightly)
 - Node.js
-- a model
+- a LLM
 
 You can install the following packages using the following command:
 
