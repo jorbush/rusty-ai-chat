@@ -1,8 +1,8 @@
-use leptos::*;
+use leptos::{ev::message, *};
 use leptos_meta::*;
 use leptos_router::*;
 
-use crate::model::conversation::Conversation;
+use crate::model::conversation::{Conversation, Message};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -34,9 +34,20 @@ pub fn App() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     let (conversation, set_conversation) = create_signal(Conversation::new());
 
+    let send = create_action(move | new_message: &String | {
+        let user_message = Message {
+            user: true.to_string(),
+            text: new_message.clone(),
+        };
+        set_conversation.update(move |c| {
+            c.messages.push(user_message);
+        });
+        // TODO coverse with AI
+        async {}
+    });
     view! {
-        // <ChatArea/>
-        // <TypeArea/>
+        // <ChatArea conversation/>
+        // <TypeArea send/>
     }
 }
 
