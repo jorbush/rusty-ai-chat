@@ -10,6 +10,7 @@ pub async fn converse(prompt: Conversation) -> Result<String, ServerFnError> {
     use actix_web::web::Data;
     use actix_web::web::ConnectionInfo;
 
+    // extract the model (already loaded) from the request
     let model = extract(|data: Data<Llama>, _connection: ConnectionInfo| async {
         data.into_inner()
     }).await.unwrap();
