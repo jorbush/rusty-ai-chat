@@ -2,6 +2,7 @@
 use leptos::*;
 use crate::model::conversation::Conversation;
 
+// public API (needs to be secured)
 #[server(Converse "/api")]
 pub async fn converse(prompt: Conversation) -> Result<String, ServerFnError> {
     use llm::models::Llama;
@@ -10,7 +11,7 @@ pub async fn converse(prompt: Conversation) -> Result<String, ServerFnError> {
     use actix_web::web::ConnectionInfo;
 
     let model = extract(|data: Data<Llama>, _connection: ConnectionInfo| async {
-        data.into_inner();
+        data.into_inner()
     }).await.unwrap();
 
     use llm::KnownModel;
@@ -39,15 +40,20 @@ pub async fn converse(prompt: Conversation) -> Result<String, ServerFnError> {
 
     // Start a new session for each request
     let mut session = model.start_session(Default::default());
-
     session.infer(
         model.as_ref(),
         &mut rng,
         &llm::InferenceRequest {
+            /*
+            This function needs to know when it should stop getting
+            new tokens from the lenguage model inference.
+            In this case, we want to stop when the AI has generated
+            a response that ends with the character's name.
+            */
             prompt: format!(
                 "{persona}\n{history}\n{character_name}:"
             ).as_str().into(),
-            parameters: Some(&llm::InferenceParameters::default()),
+            parameters: &llm::InferenceParameters::default(),
             play_back_previous_tokens: false,
             maximum_token_count: None,
         }, // input request
@@ -57,17 +63,13 @@ pub async fn converse(prompt: Conversation) -> Result<String, ServerFnError> {
         panic!("Error: {}", e);
     });
 
-    Ok(String::from(""))
+    Ok(res)
 }
 
 // only compile in the server-side binary
 cfg_if! {
     if #[cfg(feature = "ssr")] {
         use std::convert::Infallible;
-        /*
-        This function needs to know when it should stop getting
-        new tokens from the lenguage model inference.
-        */
         fn inference_callback<'a>(
             stop_sequence: String,
             buf: &'a mut String,
