@@ -42,7 +42,8 @@ fn HomePage() -> impl IntoView {
         set_conversation.update(move |c| {
             c.messages.push(user_message);
         });
-        // TODO coverse with AI
+
+        //converse(conversation.get())
         async {}
     });
     view! {
