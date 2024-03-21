@@ -3,7 +3,7 @@ use leptos::*;
 use crate::model::conversation::Conversation;
 
 // public API (needs to be secured)
-#[server(Converse "/api")]
+#[server(Converse, "/api")]
 pub async fn converse(prompt: Conversation) -> Result<String, ServerFnError> {
     use llm::models::Llama;
     use leptos_actix::extract;

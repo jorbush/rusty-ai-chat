@@ -43,8 +43,7 @@ fn HomePage() -> impl IntoView {
             c.messages.push(user_message);
         });
 
-        //converse(conversation.get())
-        async {}
+        converse(conversation.get())
     });
     view! {
         // <ChatArea conversation/>
