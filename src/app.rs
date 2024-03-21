@@ -45,6 +45,32 @@ fn HomePage() -> impl IntoView {
 
         converse(conversation.get())
     });
+
+    // Add loading effect
+    create_effect(move |_| {
+        if let Some(_) = send.input().get() {
+            let model_message = Message {
+                user: false.to_string(),
+                text: "Loading...".to_string(),
+            };
+
+            set_conversation.update(move |c| {
+                c.messages.push(model_message);
+            });
+        }
+    });
+
+    // Handle the response from the server
+    create_effect(move |_|{
+        if let Some(Ok(response)) = send.value().get() {
+            set_conversation.update(move |c| {
+                // Update the last message ("Loading ...") with the response
+                c.messages.last_mut().unwrap().text = response;
+            });
+        }
+    })
+
+
     view! {
         // <ChatArea conversation/>
         // <TypeArea send/>
