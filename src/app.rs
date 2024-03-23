@@ -2,7 +2,9 @@ use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
 
-use crate::model::conversation::{Conversation, Message};
+mod components;
+
+use crate::{app::components::chat_area::ChatArea, model::conversation::{Conversation, Message}};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -68,12 +70,12 @@ fn HomePage() -> impl IntoView {
                 c.messages.last_mut().unwrap().text = response;
             });
         }
-    })
+    });
 
 
     view! {
-        // <ChatArea conversation/>
-        // <TypeArea send/>
+        <ChatArea conversation/>
+        <TypeArea send/>
     }
 }
 
