@@ -4,7 +4,7 @@ use leptos_router::*;
 
 mod components;
 
-use crate::{app::components::chat_area::ChatArea, model::conversation::{Conversation, Message}};
+use crate::{app::components::{chat_area::ChatArea, type_area::TypeArea}, model::conversation::{Conversation, Message}};
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -38,7 +38,7 @@ fn HomePage() -> impl IntoView {
 
     let send = create_action(move | new_message: &String | {
         let user_message = Message {
-            user: true.to_string(),
+            user: true,
             text: new_message.clone(),
         };
         set_conversation.update(move |c| {
@@ -52,7 +52,7 @@ fn HomePage() -> impl IntoView {
     create_effect(move |_| {
         if let Some(_) = send.input().get() {
             let model_message = Message {
-                user: false.to_string(),
+                user: false,
                 text: "Loading...".to_string(),
             };
 
