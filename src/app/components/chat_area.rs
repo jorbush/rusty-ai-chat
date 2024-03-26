@@ -10,8 +10,13 @@ pub fn ChatArea(conversation: ReadSignal<Conversation>) -> impl IntoView {
     view! {
         <div>
             {move || conversation.get().messages.iter().map(move |message| {
+                let class_name = if message.user {
+                    USER_MESSAGE_CLASS
+                } else {
+                    AI_MESSAGE_CLASS
+                };
                 view! {
-                    <div>
+                    <div class={class_name}>
                         {message.text.clone()}
                     </div>
                 }
