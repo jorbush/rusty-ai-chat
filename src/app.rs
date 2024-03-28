@@ -4,7 +4,7 @@ use leptos_router::*;
 
 mod components;
 
-use crate::{app::components::{chat_area::ChatArea, type_area::TypeArea}, model::conversation::{Conversation, Message}};
+use crate::{api::converse, app::components::{chat_area::ChatArea, type_area::TypeArea}, model::conversation::{Conversation, Message}};
 
 #[component]
 pub fn App() -> impl IntoView {

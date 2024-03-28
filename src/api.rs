@@ -1,6 +1,7 @@
 // Hold all server-side functions
 use leptos::*;
 use crate::model::conversation::Conversation;
+use cfg_if::cfg_if;
 
 // public API (needs to be secured)
 #[server(Converse, "/api")]
@@ -8,21 +9,22 @@ pub async fn converse(prompt: Conversation) -> Result<String, ServerFnError> {
     use llm::models::Llama;
     use leptos_actix::extract;
     use actix_web::web::Data;
-    use actix_web::web::ConnectionInfo;
+    use actix_web::dev::ConnectionInfo;
 
     // extract the model (already loaded) from the request
-    let model = extract(|data: Data<Llama>, _connection: ConnectionInfo| async {
+    let model = extract(|data: actix_web::web::Data<Llama>| {
         data.into_inner()
-    }).await.unwrap();
+    })
+    .await?;
 
     use llm::KnownModel;
     let character_name = "### Assistant";
     let user_name = "### Human";
     let persona = "A chat between a human and an AI assistant.";
     let history = format!(
-        "{CHARACTER_NAME}:Hello - How may I help you today?\n\
-        {USER_NAME}:What is the capital of France?\n\
-        {CHARACTER_NAME}:Paris is the capital of France.\n"
+        "{character_name}:Hello - How may I help you today?\n\
+        {user_name}:What is the capital of France?\n\
+        {character_name}:Paris is the capital of France.\n"
     );
 
     for message in prompt.messages.into_iter() {

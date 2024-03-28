@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+  .text-area {
+    @apply w-full border-none resize-none focus:outline-none focus:ring-0 placeholder-gray-500;
+  }
   .input-field:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(50, 50, 50, 255); /* Adjust the color as needed */
